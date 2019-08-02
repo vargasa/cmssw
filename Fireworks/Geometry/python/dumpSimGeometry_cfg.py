@@ -88,6 +88,41 @@ if (options.out == defaultOutputFileName ):
 process = cms.Process("SIMDUMP")
 simGeoLoad(options.tag)
 
+
+
+process.MessageLogger = cms.Service(
+    "MessageLogger",
+    statistics = cms.untracked.vstring('cout', 'dumpOldAlgos'),
+    categories = cms.untracked.vstring('TECGeom'),
+    cout = cms.untracked.PSet(
+        threshold = cms.untracked.string('DEBUG'),
+        noLineBreaks = cms.untracked.bool(True)
+    ),
+
+    dumpOldAlgos = cms.untracked.PSet(
+        INFO = cms.untracked.PSet(
+            limit = cms.untracked.int32(-1)
+        ),
+        DEBUG = cms.untracked.PSet(
+            limit = cms.untracked.int32(-1)
+        ),
+        WARNING = cms.untracked.PSet(
+            limit = cms.untracked.int32(-1)
+        ),
+        ERROR = cms.untracked.PSet(
+            limit = cms.untracked.int32(-1)
+        ),
+        threshold = cms.untracked.string('DEBUG'),
+        TECGeom = cms.untracked.PSet(
+            limit = cms.untracked.int32(-1)
+        )
+    ),
+
+    destinations = cms.untracked.vstring('cout',
+                                         'dumpOldAlgos')
+)
+
+
 process.source = cms.Source("EmptySource")
 
 process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(1))
