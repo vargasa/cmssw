@@ -134,7 +134,7 @@ private:
   //double                   posCorrectionR;  //  Correct Positions of the Stereo Modules radial coordinate
 };
 
-DDTECModuleAlgo::DDTECModuleAlgo() { LogDebug("TECGeom") << "DDTECModuleAlgo info: Creating an instance"; }
+DDTECModuleAlgo::DDTECModuleAlgo() { edm::LogVerbatim("TECGeom") << "DDTECModuleAlgo info: Creating an instance"; }
 
 DDTECModuleAlgo::~DDTECModuleAlgo() {}
 
@@ -148,7 +148,7 @@ void DDTECModuleAlgo::initialize(const DDNumericArguments& nArgs,
 
   DDName parentName = parent().name();
 
-  LogDebug("TECGeom") << "DDTECModuleAlgo debug: Parent " << parentName << " NameSpace " << idNameSpace
+  edm::LogVerbatim("TECGeom") << "DDTECModuleAlgo debug: Parent " << parentName << " NameSpace " << idNameSpace
                       << " General Material " << genMat;
   ringNo = (int)nArgs["RingNo"];
   moduleThick = nArgs["ModuleThick"];
@@ -162,7 +162,7 @@ void DDTECModuleAlgo::initialize(const DDNumericArguments& nArgs,
 
   isRing6 = (ringNo == 6);
 
-  LogDebug("TECGeom") << "DDTECModuleAlgo debug: ModuleThick " << moduleThick << " Detector Tilt "
+  edm::LogVerbatim("TECGeom") << "DDTECModuleAlgo debug: ModuleThick " << moduleThick << " Detector Tilt "
                       << detTilt / CLHEP::deg << " Height " << fullHeight << " dl(Top) " << dlTop << " dl(Bottom) "
                       << dlBottom << " dl(Hybrid) " << dlHybrid << " rPos " << rPos << " standrad rotation "
                       << standardRot;
@@ -170,7 +170,7 @@ void DDTECModuleAlgo::initialize(const DDNumericArguments& nArgs,
   frameWidth = nArgs["FrameWidth"];
   frameThick = nArgs["FrameThick"];
   frameOver = nArgs["FrameOver"];
-  LogDebug("TECGeom") << "DDTECModuleAlgo debug: Frame Width " << frameWidth << " Thickness " << frameThick
+  edm::LogVerbatim("TECGeom") << "DDTECModuleAlgo debug: Frame Width " << frameWidth << " Thickness " << frameThick
                       << " Overlap " << frameOver;
 
   topFrameMat = sArgs["TopFrameMaterial"];
@@ -179,7 +179,7 @@ void DDTECModuleAlgo::initialize(const DDNumericArguments& nArgs,
   topFrameBotWidth = nArgs["TopFrameBotWidth"];
   topFrameThick = nArgs["TopFrameThick"];
   topFrameZ = nArgs["TopFrameZ"];
-  LogDebug("TECGeom") << "DDTECModuleAlgo debug: Top Frame Material " << topFrameMat << " Height " << topFrameHeight
+  edm::LogVerbatim("TECGeom") << "DDTECModuleAlgo debug: Top Frame Material " << topFrameMat << " Height " << topFrameHeight
                       << " Top Width " << topFrameTopWidth << " Bottom Width " << topFrameTopWidth << " Thickness "
                       << topFrameThick << " positioned at" << topFrameZ;
   double resizeH = 0.96;
@@ -197,14 +197,14 @@ void DDTECModuleAlgo::initialize(const DDNumericArguments& nArgs,
   siFrSuppBoxThick = nArgs["SiFrSuppBoxThick"];
   siFrSuppBoxMat = sArgs["SiFrSuppBoxMaterial"];
   sideFrameZ = nArgs["SideFrameZ"];
-  LogDebug("TECGeom") << "DDTECModuleAlgo debug : Side Frame Material " << sideFrameMat << " Thickness "
+  edm::LogVerbatim("TECGeom") << "DDTECModuleAlgo debug : Side Frame Material " << sideFrameMat << " Thickness "
                       << sideFrameThick << " left Leg's Width: " << sideFrameLWidth
                       << " left Leg's Height: " << sideFrameLHeight << " left Leg's tilt(theta): " << sideFrameLtheta
                       << " right Leg's Width: " << sideFrameRWidth << " right Leg's Height: " << sideFrameRHeight
                       << " right Leg's tilt(theta): " << sideFrameRtheta
                       << "Supplies Box's Material: " << siFrSuppBoxMat << " positioned at" << sideFrameZ;
   for (int i = 0; i < (int)(siFrSuppBoxWidth.size()); i++) {
-    LogDebug("TECGeom") << " Supplies Box" << i << "'s Width: " << siFrSuppBoxWidth[i] << " Supplies Box" << i
+    edm::LogVerbatim("TECGeom") << " Supplies Box" << i << "'s Width: " << siFrSuppBoxWidth[i] << " Supplies Box" << i
                         << "'s Height: " << siFrSuppBoxHeight[i] << " Supplies Box" << i
                         << "'s y Position: " << siFrSuppBoxYPos[i];
   }
@@ -213,7 +213,7 @@ void DDTECModuleAlgo::initialize(const DDNumericArguments& nArgs,
   sideWidthBottom = nArgs["SideWidthBottom"];
   waferRot = sArgs["WaferRotation"];
   waferPosition = nArgs["WaferPosition"];
-  LogDebug("TECGeom") << "DDTECModuleAlgo debug: Wafer Material " << waferMat << " Side Width Top" << sideWidthTop
+  edm::LogVerbatim("TECGeom") << "DDTECModuleAlgo debug: Wafer Material " << waferMat << " Side Width Top" << sideWidthTop
                       << " Side Width Bottom" << sideWidthBottom << " and positioned at " << waferPosition
                       << " positioned with rotation"
                       << " matrix:" << waferRot;
@@ -224,7 +224,7 @@ void DDTECModuleAlgo::initialize(const DDNumericArguments& nArgs,
   activeRot = sArgs["ActiveRotation"];
   activeZ = nArgs["ActiveZ"];
   backplaneThick = nArgs["BackPlaneThick"];
-  LogDebug("TECGeom") << "DDTECModuleAlgo debug: Active Material " << activeMat << " Height " << activeHeight
+  edm::LogVerbatim("TECGeom") << "DDTECModuleAlgo debug: Active Material " << activeMat << " Height " << activeHeight
                       << " rotated by " << activeRot << " translated by (0,0," << -0.5 * backplaneThick << ")"
                       << " Thickness/Z" << waferThick - backplaneThick << "/" << activeZ;
 
@@ -233,7 +233,7 @@ void DDTECModuleAlgo::initialize(const DDNumericArguments& nArgs,
   hybridWidth = nArgs["HybridWidth"];
   hybridThick = nArgs["HybridThick"];
   hybridZ = nArgs["HybridZ"];
-  LogDebug("TECGeom") << "DDTECModuleAlgo debug: Hybrid Material " << hybridMat << " Height " << hybridHeight
+  edm::LogVerbatim("TECGeom") << "DDTECModuleAlgo debug: Hybrid Material " << hybridMat << " Height " << hybridHeight
                       << " Width " << hybridWidth << " Thickness " << hybridThick << " Z" << hybridZ;
 
   pitchMat = sArgs["PitchMaterial"];
@@ -242,7 +242,7 @@ void DDTECModuleAlgo::initialize(const DDNumericArguments& nArgs,
   pitchWidth = nArgs["PitchWidth"];
   pitchZ = nArgs["PitchZ"];
   pitchRot = sArgs["PitchRotation"];
-  LogDebug("TECGeom") << "DDTECModuleAlgo debug: Pitch Adapter Material " << pitchMat << " Height " << pitchHeight
+  edm::LogVerbatim("TECGeom") << "DDTECModuleAlgo debug: Pitch Adapter Material " << pitchMat << " Height " << pitchHeight
                       << " Thickness " << pitchThick << " position with "
                       << " rotation " << pitchRot << " at Z" << pitchZ;
 
@@ -251,7 +251,7 @@ void DDTECModuleAlgo::initialize(const DDNumericArguments& nArgs,
   bridgeThick = nArgs["BridgeThick"];
   bridgeHeight = nArgs["BridgeHeight"];
   bridgeSep = nArgs["BridgeSeparation"];
-  LogDebug("TECGeom") << "DDTECModuleAlgo debug: Bridge Material " << bridgeMat << " Width " << bridgeWidth
+  edm::LogVerbatim("TECGeom") << "DDTECModuleAlgo debug: Bridge Material " << bridgeMat << " Width " << bridgeWidth
                       << " Thickness " << bridgeThick << " Height " << bridgeHeight << " Separation " << bridgeSep;
 
   siReenforceWidth = vArgs["SiReenforcementWidth"];
@@ -260,11 +260,11 @@ void DDTECModuleAlgo::initialize(const DDNumericArguments& nArgs,
   siReenforceThick = nArgs["SiReenforcementThick"];
   siReenforceMat = sArgs["SiReenforcementMaterial"];
 
-  LogDebug("TECGeom") << "FALTBOOT DDTECModuleAlgo debug : Si-Reenforcement Material " << sideFrameMat << " Thickness "
+  edm::LogVerbatim("TECGeom") << "FALTBOOT DDTECModuleAlgo debug : Si-Reenforcement Material " << sideFrameMat << " Thickness "
                       << siReenforceThick;
 
   for (int i = 0; i < (int)(siReenforceWidth.size()); i++) {
-    LogDebug("TECGeom") << " SiReenforcement" << i << "'s Width: " << siReenforceWidth[i] << " SiReenforcement" << i
+    edm::LogVerbatim("TECGeom") << " SiReenforcement" << i << "'s Width: " << siReenforceWidth[i] << " SiReenforcement" << i
                         << "'s Height: " << siReenforceHeight[i] << " SiReenforcement" << i
                         << "'s y Position: " << siReenforceYPos[i];
   }
@@ -280,25 +280,25 @@ void DDTECModuleAlgo::initialize(const DDNumericArguments& nArgs,
   //Everything that is normal/stereo specific comes here
   isStereo = (int)nArgs["isStereo"] == 1;
   if (!isStereo) {
-    LogDebug("TECGeom") << "This is a normal module, in ring " << ringNo << "!";
+    edm::LogVerbatim("TECGeom") << "This is a normal module, in ring " << ringNo << "!";
   } else {
-    LogDebug("TECGeom") << "This is a stereo module, in ring " << ringNo << "!";
+    edm::LogVerbatim("TECGeom") << "This is a stereo module, in ring " << ringNo << "!";
     posCorrectionPhi = nArgs["PosCorrectionPhi"];
     topFrame2LHeight = nArgs["TopFrame2LHeight"];
     topFrame2RHeight = nArgs["TopFrame2RHeight"];
     topFrame2Width = nArgs["TopFrame2Width"];
-    LogDebug("TECGeom") << "Phi Position corrected by " << posCorrectionPhi << "*rad";
-    LogDebug("TECGeom") << "DDTECModuleAlgo debug: stereo Top Frame 2nd Part left Heigt " << topFrame2LHeight
+    edm::LogVerbatim("TECGeom") << "Phi Position corrected by " << posCorrectionPhi << "*rad";
+    edm::LogVerbatim("TECGeom") << "DDTECModuleAlgo debug: stereo Top Frame 2nd Part left Heigt " << topFrame2LHeight
                         << " right Height " << topFrame2RHeight << " Width " << topFrame2Width;
 
     sideFrameLWidthLow = nArgs["SideFrameLWidthLow"];
     sideFrameRWidthLow = nArgs["SideFrameRWidthLow"];
 
-    LogDebug("TECGeom") << " left Leg's lower Width: " << sideFrameLWidthLow
+    edm::LogVerbatim("TECGeom") << " left Leg's lower Width: " << sideFrameLWidthLow
                         << " right Leg's lower Width: " << sideFrameRWidthLow;
 
     // posCorrectionR =  nArgs["PosCorrectionR"];
-    //LogDebug("TECGeom") << "Stereo Module Position Correction with R = " << posCorrectionR;
+    //edm::LogVerbatim("TECGeom") << "Stereo Module Position Correction with R = " << posCorrectionR;
   }
 }
 
@@ -322,7 +322,7 @@ void DDTECModuleAlgo::doPos(const DDLogicalPart& toPos,
   }
 
   cpv.position(toPos, mother, copyNr, tran, rot);
-  LogDebug("TECGeom") << "DDTECModuleAlgo test: " << toPos.name() << " positioned in " << mother.name() << " at "
+  edm::LogVerbatim("TECGeom") << "DDTECModuleAlgo test: " << toPos.name() << " positioned in " << mother.name() << " at "
                       << tran << " with " << rot;
 }
 
@@ -347,7 +347,7 @@ void DDTECModuleAlgo::doPos(DDLogicalPart toPos, double x, double y, double z, s
 }
 
 void DDTECModuleAlgo::execute(DDCompactView& cpv) {
-  LogDebug("TECGeom") << "==>> Constructing DDTECModuleAlgo...";
+  edm::LogVerbatim("TECGeom") << "==>> Constructing DDTECModuleAlgo...";
   //declarations
   double tmp;
   double dxdif, dzdif;
@@ -369,7 +369,7 @@ void DDTECModuleAlgo::execute(DDCompactView& cpv) {
   const double topFrameEndZ = 0.5 * (-waferPosition + fullHeight) + pitchHeight + hybridHeight - topFrameHeight;
   DDName parentName = parent().name();
   idName = parentName.name();
-  LogDebug("TECGeom") << "==>> " << idName << " parent " << parentName << " namespace " << idNameSpace;
+  edm::LogVerbatim("TECGeom") << "==>> " << idName << " parent " << parentName << " namespace " << idNameSpace;
   DDSolid solid;
 
   //set global parameters
@@ -403,7 +403,7 @@ void DDTECModuleAlgo::execute(DDCompactView& cpv) {
   if (isStereo)
     bl1 = 0.5 * sideFrameLWidthLow;
   solid = DDSolidFactory::trap(DDName(name, idNameSpace), dz, thet, 0, h1, bl1, bl1, 0, h1, bl2, bl2, 0);
-  LogDebug("TECGeom") << "DDTECModuleAlgo test:\t" << solid.name() << " Trap made of " << matname << " of dimensions "
+  edm::LogVerbatim("TECGeom") << "DDTECModuleAlgo test:\t" << solid.name() << " Trap made of " << matname << " of dimensions "
                       << dz << ",  " << thet << ", 0, " << h1 << ", " << bl1 << ", " << bl1 << ", 0, " << h1 << ", "
                       << bl2 << ", " << bl2 << ", 0";
   DDLogicalPart sideFrameLeft(solid.ddname(), matter, solid);
@@ -438,7 +438,7 @@ void DDTECModuleAlgo::execute(DDCompactView& cpv) {
   if (isStereo)
     bl1 = 0.5 * sideFrameRWidthLow;
   solid = DDSolidFactory::trap(DDName(name, idNameSpace), dz, thet, 0, h1, bl1, bl1, 0, h1, bl2, bl2, 0);
-  LogDebug("TECGeom") << "DDTECModuleAlgo test:\t" << solid.name() << " Trap made of " << matname << " of dimensions "
+  edm::LogVerbatim("TECGeom") << "DDTECModuleAlgo test:\t" << solid.name() << " Trap made of " << matname << " of dimensions "
                       << dz << ", " << thet << ", 0, " << h1 << ", " << bl1 << ", " << bl1 << ", 0, " << h1 << ", "
                       << bl2 << ", " << bl2 << ", 0";
   DDLogicalPart sideFrameRight(solid.ddname(), matter, solid);
@@ -474,7 +474,7 @@ void DDTECModuleAlgo::execute(DDCompactView& cpv) {
     // ^-- this calculates the lower left angel of the tipped trapezoid, which is the SideFframe...
 
     solid = DDSolidFactory::trap(DDName(name, idNameSpace), dz, thet, 0, h1, bl1, bl1, 0, h1, bl2, bl2, 0);
-    LogDebug("TECGeom") << "DDTECModuleAlgo test:\t" << solid.name() << " Trap made of " << matname << " of dimensions "
+    edm::LogVerbatim("TECGeom") << "DDTECModuleAlgo test:\t" << solid.name() << " Trap made of " << matname << " of dimensions "
                         << dz << ", 0, 0, " << h1 << ", " << bl1 << ", " << bl1 << ", 0, " << h1 << ", " << bl2 << ", "
                         << bl2 << ", 0";
     DDLogicalPart siFrSuppBox(solid.ddname(), matter, solid);
@@ -506,7 +506,7 @@ void DDTECModuleAlgo::execute(DDCompactView& cpv) {
   dy = 0.5 * hybridThick;
   dz = 0.5 * hybridHeight;
   solid = DDSolidFactory::box(DDName(name, idNameSpace), dx, dy, dz);
-  LogDebug("TECGeom") << "DDTECModuleAlgo test:\t" << solid.name() << " Box made of " << matname << " of dimensions "
+  edm::LogVerbatim("TECGeom") << "DDTECModuleAlgo test:\t" << solid.name() << " Box made of " << matname << " of dimensions "
                       << dx << ", " << dy << ", " << dz;
   DDLogicalPart hybrid(solid.ddname(), matter, solid);
 
@@ -526,7 +526,7 @@ void DDTECModuleAlgo::execute(DDCompactView& cpv) {
   h1 = 0.5 * waferThick;
   dz = 0.5 * fullHeight;
   solid = DDSolidFactory::trap(DDName(name, idNameSpace), dz, 0, 0, h1, bl1, bl1, 0, h1, bl2, bl2, 0);
-  LogDebug("TECGeom") << "DDTECModuleAlgo test:\t" << solid.name() << " Trap made of " << matname << " of dimensions "
+  edm::LogVerbatim("TECGeom") << "DDTECModuleAlgo test:\t" << solid.name() << " Trap made of " << matname << " of dimensions "
                       << dz << ", 0, 0, " << h1 << ", " << bl1 << ", " << bl1 << ", 0, " << h1 << ", " << bl2 << ", "
                       << bl2 << ", 0";
   DDLogicalPart wafer(solid.ddname(), matter, solid);
@@ -552,7 +552,7 @@ void DDTECModuleAlgo::execute(DDCompactView& cpv) {
     bl1 = tmp;
   }
   solid = DDSolidFactory::trap(DDName(name, idNameSpace), dz, 0, 0, h1, bl2, bl1, 0, h1, bl2, bl1, 0);
-  LogDebug("TECGeom") << "DDTECModuleAlgo test:\t" << solid.name() << " Trap made of " << matname << " of dimensions "
+  edm::LogVerbatim("TECGeom") << "DDTECModuleAlgo test:\t" << solid.name() << " Trap made of " << matname << " of dimensions "
                       << dz << ", 0, 0, " << h1 << ", " << bl2 << ", " << bl1 << ", 0, " << h1 << ", " << bl2 << ", "
                       << bl1 << ", 0";
   DDLogicalPart active(solid.ddname(), matter, solid);
@@ -584,7 +584,7 @@ void DDTECModuleAlgo::execute(DDCompactView& cpv) {
       bl1 = tmp;
     }
     solid = DDSolidFactory::trap(DDName(name, idNameSpace), dz, 0, 0, h1, bl2, bl1, 0, h1, bl2, bl1, 0);
-    LogDebug("TECGeom") << "DDTECModuleAlgo test:\t" << solid.name() << " Trap made of " << matname << " of dimensions "
+    edm::LogVerbatim("TECGeom") << "DDTECModuleAlgo test:\t" << solid.name() << " Trap made of " << matname << " of dimensions "
                         << dz << ", 0, 0, " << h1 << ", " << bl2 << ", " << bl1 << ", 0, " << h1 << ", " << bl2 << ", "
                         << bl1 << ", 0";
     DDLogicalPart inactive(solid.ddname(), matter, solid);
@@ -602,7 +602,7 @@ void DDTECModuleAlgo::execute(DDCompactView& cpv) {
     dy = 0.5 * pitchThick;
     dz = 0.5 * pitchHeight;
     solid = DDSolidFactory::box(DDName(name, idNameSpace), dx, dy, dz);
-    LogDebug("TECGeom") << "DDTECModuleAlgo test:\t" << solid.name() << " Box made of " << matname << " of dimensions "
+    edm::LogVerbatim("TECGeom") << "DDTECModuleAlgo test:\t" << solid.name() << " Box made of " << matname << " of dimensions "
                         << dx << ", " << dy << ", " << dz;
   } else {
     dz = 0.5 * pitchWidth;
@@ -611,7 +611,7 @@ void DDTECModuleAlgo::execute(DDCompactView& cpv) {
     bl2 = 0.5 * pitchHeight - 0.5 * dz * sin(detTilt);
     double thet = atan((bl1 - bl2) / (2. * dz));
     solid = DDSolidFactory::trap(DDName(name, idNameSpace), dz, thet, 0, h1, bl1, bl1, 0, h1, bl2, bl2, 0);
-    LogDebug("TECGeom") << "DDTECModuleAlgo test:\t" << solid.name() << " Trap made of " << matname << " of dimensions "
+    edm::LogVerbatim("TECGeom") << "DDTECModuleAlgo test:\t" << solid.name() << " Trap made of " << matname << " of dimensions "
                         << dz << ", " << thet / CLHEP::deg << ", 0, " << h1 << ", " << bl1 << ", " << bl1 << ", 0, "
                         << h1 << ", " << bl2 << ", " << bl2 << ", 0";
   }
@@ -643,7 +643,7 @@ void DDTECModuleAlgo::execute(DDCompactView& cpv) {
   }
 
   solid = DDSolidFactory::trap(DDName(name, idNameSpace), dz, 0, 0, h1, bl1, bl1, 0, h1, bl2, bl2, 0);
-  LogDebug("TECGeom") << "DDTECModuleAlgo test:\t" << solid.name() << " Trap made of " << matname << " of dimensions "
+  edm::LogVerbatim("TECGeom") << "DDTECModuleAlgo test:\t" << solid.name() << " Trap made of " << matname << " of dimensions "
                       << dz << ", 0, 0, " << h1 << ", " << bl1 << ", " << bl1 << ", 0, " << h1 << ", " << bl2 << ", "
                       << bl2 << ", 0";
   DDLogicalPart topFrame(solid.ddname(), matter, solid);
@@ -658,7 +658,7 @@ void DDTECModuleAlgo::execute(DDCompactView& cpv) {
     double thet = atan((bl1 - bl2) / (2. * dz));
 
     solid = DDSolidFactory::trap(DDName(name, idNameSpace), dz, thet, 0, h1, bl1, bl1, 0, h1, bl2, bl2, 0);
-    LogDebug("TECGeom") << "DDTECModuleAlgo test:\t" << solid.name() << " Trap made of " << matname << " of dimensions "
+    edm::LogVerbatim("TECGeom") << "DDTECModuleAlgo test:\t" << solid.name() << " Trap made of " << matname << " of dimensions "
                         << dz << ", " << thet / CLHEP::deg << ", 0, " << h1 << ", " << bl1 << ", " << bl1 << ", 0, "
                         << h1 << ", " << bl2 << ", " << bl2 << ", 0";
   }
@@ -689,7 +689,7 @@ void DDTECModuleAlgo::execute(DDCompactView& cpv) {
     bl1 = bl2 = 0.5 * siReenforceWidth[i];
 
     solid = DDSolidFactory::trap(DDName(name, idNameSpace), dz, 0, 0, h1, bl1, bl1, 0, h1, bl2, bl2, 0);
-    LogDebug("TECGeom") << "DDTECModuleAlgo test:\t" << solid.name() << " Trap made of " << matname << " of dimensions "
+    edm::LogVerbatim("TECGeom") << "DDTECModuleAlgo test:\t" << solid.name() << " Trap made of " << matname << " of dimensions "
                         << dz << ", 0, 0, " << h1 << ", " << bl1 << ", " << bl1 << ", 0, " << h1 << ", " << bl2 << ", "
                         << bl2 << ", 0";
     DDLogicalPart siReenforce(solid.ddname(), matter, solid);
@@ -720,7 +720,7 @@ void DDTECModuleAlgo::execute(DDCompactView& cpv) {
     h1 = 0.5 * bridgeThick;
     dz = 0.5 * bridgeHeight;
     solid = DDSolidFactory::trap(DDName(name, idNameSpace), dz, 0, 0, h1, bl1, bl1, 0, h1, bl2, bl2, 0);
-    LogDebug("TECGeom") << "DDTECModuleAlgo test:\t" << solid.name() << " Trap made of " << matname << " of dimensions "
+    edm::LogVerbatim("TECGeom") << "DDTECModuleAlgo test:\t" << solid.name() << " Trap made of " << matname << " of dimensions "
                         << dz << ", 0, 0, " << h1 << ", " << bl1 << ", " << bl1 << ", 0, " << h1 << ", " << bl2 << ", "
                         << bl2 << ", 0";
     DDLogicalPart bridge(solid.ddname(), matter, solid);
@@ -730,15 +730,15 @@ void DDTECModuleAlgo::execute(DDCompactView& cpv) {
     matter = DDMaterial(matname);
     bl1 = 0.5 * bridgeSep;
     solid = DDSolidFactory::box(DDName(name, idNameSpace), bl1, h1, dz);
-    LogDebug("TECGeom") << "DDTECModuleAlgo test:\t" << solid.name() << " Box made of " << matname << " of dimensions "
+    edm::LogVerbatim("TECGeom") << "DDTECModuleAlgo test:\t" << solid.name() << " Box made of " << matname << " of dimensions "
                         << bl1 << ", " << h1 << ", " << dz;
     DDLogicalPart bridgeGap(solid.ddname(), matter, solid);
     cpv.position(bridgeGap, bridge, 1, DDTranslation(0.0, 0.0, 0.0), DDRotation());
-    LogDebug("TECGeom") << "DDTECModuleAlgo test: " << bridgeGap.name() << " number 1 positioned in " << bridge.name()
+    edm::LogVerbatim("TECGeom") << "DDTECModuleAlgo test: " << bridgeGap.name() << " number 1 positioned in " << bridge.name()
                         << " at (0,0,0) with no rotation";
   }
 
-  LogDebug("TECGeom") << "<<== End of DDTECModuleAlgo construction ...";
+  edm::LogVerbatim("TECGeom") << "<<== End of DDTECModuleAlgo construction ...";
 }
 
 DEFINE_EDM_PLUGIN(DDAlgorithmFactory, DDTECModuleAlgo, "track:DDTECModuleAlgo");
