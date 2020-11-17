@@ -164,5 +164,7 @@ process.maxEvents = cms.untracked.PSet(
 
 process.MessageLogger.destinations.extend(["LogTrackingMaterialAnalysis"])
 process.MessageLogger.categories.append("TrackingMaterialAnalysis")
+process.MessageLogger.categories.append("Geometry")
+process.MessageLogger.categories.append("DDFilteredView")
 process.path = cms.Path(process.trackingMaterialAnalyser)
 

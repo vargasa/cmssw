@@ -56,6 +56,13 @@ MaterialAccountingGroup::MaterialAccountingGroup(const std::string& name, const 
     m_elements.push_back(GlobalPoint(position.x(), position.y(), position.z()));
   }
 
+  std::cout << m_elements.size() << "\n";
+  for(const auto& elm: m_elements){
+    std::cout << elm << "\n";
+  }
+
+  throw;
+
   // grow the bounding box
   for (unsigned int i = 0; i < m_elements.size(); ++i) {
     m_boundingbox.grow(m_elements[i].perp(), m_elements[i].z());

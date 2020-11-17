@@ -35,20 +35,30 @@ DD4hep_MaterialAccountingGroup::DD4hep_MaterialAccountingGroup(const std::string
   edm::LogVerbatim("TrackingMaterialAnalysis") << "Elements within: " << name;
 
   for (const auto& j : fv.specpars()) {
+    std::cout << "SpecPar: " << j.first << "\n";
     for (const auto& k : j.second->paths) {
-      if (firstChild) {
+      std::cout << "\tPath: " << k << "\n";
+      if(firstChild){
         std::vector<std::vector<cms::Node*>> children = fv.children(k);
+        std::cout << "\tChildren size : " << children.size() << "\n";
         for (auto const& path : children) {
           cms::Translation trans = fv.translation(path);
           GlobalPoint gp = GlobalPoint(trans.x(), trans.y(), trans.z());
           m_elements.emplace_back(gp);
-          edm::LogVerbatim("TrackerMaterialAnalysis")
+          std::cout
               << "MaterialAccountingGroup:\t"
               << "Adding element at (r,z) " << gp.perp() << "," << gp.z() << std::endl;
         }
       }
     }
   }
+
+  std::cout << m_elements.size() << "\n";
+  for(const auto& elm: m_elements){
+    std::cout << elm << "\n";
+  }
+
+  throw;
 
   for (unsigned int i = 0; i < m_elements.size(); ++i) {
     m_boundingbox.grow(m_elements[i].perp(), m_elements[i].z());

@@ -377,6 +377,7 @@ std::vector<std::vector<Node*>> DDFilteredView::children(const std::string& sele
   std::vector<std::pair<std::string, int>> names = toNodeNames(selectPath);
   auto rit = names.rbegin();
   Node* node = it_.back().Next();
+  if (node == nullptr) std::cout << "DDFilteredView::children node is nullptr\n";
   while (node != nullptr) {
     if (node->GetVolume()->GetName() == rit->first) {
       std::string pathToNode = path();
@@ -391,6 +392,8 @@ std::vector<std::vector<Node*>> DDFilteredView::children(const std::string& sele
         }
         result.emplace_back(node);
         paths.emplace_back(result);
+      } else {
+	std::cout << "Sorry, No Match! " << pathFromParent << "\t" << selectPath << "\n";
       }
     }
     node = it_.back().Next();
